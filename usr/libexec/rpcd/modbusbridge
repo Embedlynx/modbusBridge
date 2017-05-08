@@ -1,0 +1,23 @@
+#!/bin/sh
+
+case "$1" in
+	list)
+		echo '{ "start": { }, "stop": { }, "reload": { } }'
+	;;
+	call)
+		case "$2" in
+			start)
+				logger -t "modbusbridge" "call" "$2"
+				echo "modbusbridge call $2" > /tmp/modbusbridge
+			;;
+			stop)
+				logger -t "modbusbridge" "call" "$2"
+				echo "modbusbridge call $2" > /tmp/modbusbridge
+			;;
+			reload)
+				logger -t "modbusbridge" "call" "$2"
+				echo "mobusbridge call $2" > /tmp/modbusbridge
+			;;
+		esac
+	;;
+esac
