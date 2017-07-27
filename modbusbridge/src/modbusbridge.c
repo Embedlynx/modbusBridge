@@ -17,13 +17,6 @@
 modbus_t * rtu_context = NULL;
 modbus_t * tcp_context = NULL;
 
-void print_usage() {
-    printf("Usage: "
-           "modbusbridge DEVICE BAUD_RATE PARITY DATA_BITS STOP_BITS IP_ADDRESS PORT\n\n"
-           "Example usage:\n"
-           "modbusbridge /dev/ttyS0 115200 'N' 8 1 192.168.1.1 1502\n\n");
-}
-
 
 bool is_valid_baud_rate(int baud_rate) {
     return  baud_rate == 9600  ||
@@ -61,6 +54,14 @@ bool is_valid_port(unsigned int port) {
 }
 
 
+void print_usage() {
+    printf("Usage: "
+           "modbusbridge DEVICE BAUD_RATE PARITY DATA_BITS STOP_BITS IP_ADDRESS PORT\n\n"
+           "Example usage:\n"
+           "modbusbridge /dev/ttyS0 115200 'N' 8 1 192.168.1.1 1502\n\n");
+}
+
+
 void termination_handler(int signum) {
     modbus_close(rtu_context);
     modbus_free(rtu_context);
@@ -93,10 +94,8 @@ int main(int argc, char * argv[]) {
     unsigned int port;
 
 
-
     //RTU arguments validation
     device = argv[1];
-
 
     baud_rate = atoi(argv[2]);
     if (is_valid_baud_rate(baud_rate) == false) {
@@ -104,13 +103,11 @@ int main(int argc, char * argv[]) {
         return 1;
     }
 
-
     parity = argv[3][0];
     if (is_valid_parity(parity) == false) {
         printf("%s is not a valid parity value.\n", argv[3]);
         return 1;
     }
-
 
     data_bits = atoi(argv[4]);
     if (is_valid_data_bits(data_bits) == false) {
@@ -118,13 +115,11 @@ int main(int argc, char * argv[]) {
         return 1;
     }
 
-
     stop_bits = atoi(argv[5]);
     if (is_valid_stop_bits(stop_bits) == false) {
         printf("%s is not a valid stop_bits value.\n", argv[5]);
         return 1;
     }
-
 
 
     //TCP/IP arguments validation
@@ -139,9 +134,6 @@ int main(int argc, char * argv[]) {
         printf ("%s is not a valid port.\n", argv[7]);
         return 1;
     }
-
-
-
 
 
     //RTU context allocation
@@ -166,6 +158,7 @@ int main(int argc, char * argv[]) {
         printf("Unable to create Modbus TCP context: %s\n", modbus_strerror(errno));
         return 2;
     }
+
 
     struct sigaction signal_action;
     signal_action.sa_handler = termination_handler;
@@ -213,8 +206,6 @@ int main(int argc, char * argv[]) {
 
     FD_SET(server_socket, &active_connections);
 
-    int i = 0;
-
     while (1) {
         connections = active_connections;
 
@@ -223,14 +214,14 @@ int main(int argc, char * argv[]) {
             termination_handler(4);
         }
 
-        for (i = 0; i < FD_SETSIZE; ++i) {
+        for (int i = 0; i < FD_SETSIZE; ++i) {
             if (FD_ISSET(i, &connections)) {
 
-                //Connection on server socket in other words
-                //a client is asking for a new connection
+                //Connection on server socket -
+                //in other words new client is asking for a new connection
                 if (i == server_socket) {
 
-                    //clear temporary address variable
+                    //clear the temporary address variable
                     memset(&address, 0, address_length);
                     new_fd = accept(server_socket, (struct sockaddr *)&address, &address_length);
 
@@ -258,7 +249,7 @@ int main(int argc, char * argv[]) {
                         close(i);
                         FD_CLR(i, &active_connections);
 
-                    //Parse the tcp request and send it over rtu context
+                    //Parse the tcp request and send it through the rtu context
                     } else {
                         data_start_index = modbus_get_header_length(tcp_context) - 1;
 
@@ -284,7 +275,7 @@ int main(int argc, char * argv[]) {
                             }
                         }
 
-                        //If exists exception send it in modbus
+                        //If exists an exception send it through the tcp context
                         if (exception != 0) {
                             if (exception > MODBUS_ENOBASE && MODBUS_ENOBASE < (MODBUS_ENOBASE + MODBUS_EXCEPTION_MAX)) {
                                 exception -= MODBUS_ENOBASE;
@@ -299,5 +290,6 @@ int main(int argc, char * argv[]) {
             }
         }
     }
+
     return 0;
 }
