@@ -57,6 +57,21 @@ bool is_valid_port(unsigned int port) {
 }
 
 
+void termination_handler(int signum) {
+    modbus_close(rtu_context);
+    modbus_free(rtu_context);
+    rtu_context = NULL;
+
+    modbus_close(tcp_context);
+    modbus_free(tcp_context);
+    tcp_context = NULL;
+
+    printf("\nCalled %d\n", signum);
+
+    exit(signum);
+}
+
+
 int main(int argc, char * argv[]) {
     if (argc != ARGUMENTS_COUNT) {
         printf("Invalid arguments count.\n\n");
@@ -156,6 +171,17 @@ int main(int argc, char * argv[]) {
            modbus_free(tcp_context);
            return 2;
     }
+
+
+    struct sigaction signal_action;
+    signal_action.sa_handler = termination_handler;
+    sigemptyset (&signal_action.sa_mask);
+    signal_action.sa_flags = 0;
+
+    sigaction(SIGINT, &signal_action, NULL);
+    sigaction(SIGTERM, &signal_action, NULL);
+    sigaction(SIGHUP, &signal_action, NULL);
+
 
 
     return 0;
