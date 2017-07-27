@@ -1,7 +1,8 @@
 LIBS += -lmodbus
+CFLAGS=-Wall -Wpedantic -Wextra
 
 modbusbridge: modbusbridge.o
-	$(CC) $(LDFLAGS) modbusbridge.o -o modbusbridge $(LIBS)
+	$(CC) $(CFLAGS) modbusbridge.o -o modbusbridge $(LIBS)
 modbusbridge.o: modbusbridge.c
 	$(CC) $(CFLAGS) -c modbusbridge.c -o modbusbridge.o
 
