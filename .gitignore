@@ -1,0 +1,2 @@
+*.o
+modbusbridge/src/modbusbridge
