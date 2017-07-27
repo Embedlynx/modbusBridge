@@ -8,6 +8,6 @@ config modbus_context 'rtu'
 	option slave_id '255'
 
 config modbus_context 'tcp'
-	option ipaddr '192.168.168'
-	option port '65535'
+	option ipaddr '192.168.168.1'
+	option port '502'
 
