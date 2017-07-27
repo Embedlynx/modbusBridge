@@ -2,7 +2,7 @@ module("luci.controller.modbusbridge.configure", package.seeall)
 
 function index()
 --    entry({"modbusbridge", "configure"}, cbi("modbusbridge-configure/configure"), "Modbus Bridge Configuration", 30).dependent=false
-    entry({"admin", "services", "modbusbridge"}, cbi("modbusbridge-configure/configure"), "Modbus Bridge", 30).dependent=false
+    entry({"admin", "services", "modbusbridge"}, cbi("modbusbridge-configure/configure"), "Modbusbridge", 30).dependent=false
     entry({"admin", "services", "modbusbridge", "reload"}, call("reload_modbusbridge")).dependent=false
 end
 

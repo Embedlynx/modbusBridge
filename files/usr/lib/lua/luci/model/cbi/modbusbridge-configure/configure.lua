@@ -1,4 +1,4 @@
-m = Map("modbusbridge", "Modbus Bridge Configuration", "Basic modbus bridge configuration")
+m = Map("modbusbridge", "Modbusbridge Configuration", "Basic modbusbridge configuration")
 
 rtu = m:section(NamedSection, "rtu", "modbus_context", "RTU configuration")
 
