@@ -4,7 +4,7 @@ rtu = m:section(NamedSection, "rtu", "modbus_context", "RTU configuration")
 
 serial_port = rtu:option(ListValue, "serial_port", "Serial Port")
 serial_port:value("/dev/ttyS0", "/dev/ttyS0")
-serial_port:value("/dev/ttyUSB0", "/dev/ttyUSB0")
+serial_port:value("/dev/ttyS1", "/dev/ttyS1")
 serial_port.default = "/dev/ttyS0"
 
 baudrate = rtu:option(ListValue, "baudrate", "Baudrate") 
