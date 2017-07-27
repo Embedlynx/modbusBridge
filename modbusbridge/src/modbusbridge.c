@@ -57,7 +57,6 @@ bool is_valid_port(unsigned int port) {
 }
 
 
-
 int main(int argc, char * argv[]) {
     if (argc != ARGUMENTS_COUNT) {
         printf("Invalid arguments count.\n\n");
@@ -125,6 +124,38 @@ int main(int argc, char * argv[]) {
     }
 
 
+
+
+
+    //RTU context allocation
+    rtu_context = modbus_new_rtu(device, baud_rate, parity, data_bits, stop_bits);
+
+    if (rtu_context == NULL) {
+        printf("Unable to create the Modbus RTU context: %s\n", modbus_strerror(errno));
+        return 2;
+    }
+
+    if (modbus_connect(rtu_context) == -1) {
+           printf("Modbus RTU connection failed: %s\n", modbus_strerror(errno));
+           modbus_free(rtu_context);
+           return 2;
+    }
+
+
+    //TCP context allocation
+    tcp_context = modbus_new_tcp(ip_address, port);
+
+    if (tcp_context == NULL) {
+        printf("Unable to create Modbus TCP context: %s\n", modbus_strerror(errno));
+        return 2;
+    }
+
+    if (modbus_connect(tcp_context) == -1) {
+           printf("Modbus TCP connection failed: %s\n", modbus_strerror(errno));
+           modbus_free(rtu_context);
+           modbus_free(tcp_context);
+           return 2;
+    }
 
 
     return 0;
