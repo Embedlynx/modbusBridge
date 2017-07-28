@@ -44,6 +44,9 @@ define Package/modbusbridge/install
 	$(INSTALL_DIR) $(1)/etc/config/
 	$(INSTALL_BIN) files/etc/config/modbusbridge $(1)/etc/config/modbusbridge
 
+	$(INSTALL_DIR) $(1)/etc/init.d/
+	$(INSTALL_BIN) files/etc/init.d/modbusbridge $(1)/etc/init.d/modbusbridge
+
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller/modbusbridge
 	$(INSTALL_BIN) files/usr/lib/lua/luci/controller/modbusbridge/configure.lua $(1)/usr/lib/lua/luci/controller/modbusbridge/configure.lua
 
