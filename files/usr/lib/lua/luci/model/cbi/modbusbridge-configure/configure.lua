@@ -2,10 +2,10 @@ m = Map("modbusbridge", "Modbusbridge Configuration", "Basic modbusbridge config
 
 rtu = m:section(NamedSection, "rtu", "modbus_context", "RTU configuration")
 
-serial_port = rtu:option(ListValue, "serial_port", "Device")
-serial_port:value("/dev/ttyS0", "/dev/ttyS0")
-serial_port:value("/dev/ttyS1", "/dev/ttyS1")
-serial_port.default = "/dev/ttyS0"
+device = rtu:option(ListValue, "device", "Device")
+device:value("/dev/ttyS0", "/dev/ttyS0")
+device:value("/dev/ttyS1", "/dev/ttyS1")
+device.default = "/dev/ttyS0"
 
 baudrate = rtu:option(ListValue, "baudrate", "Baudrate") 
 baudrate:value("1200", "1200")

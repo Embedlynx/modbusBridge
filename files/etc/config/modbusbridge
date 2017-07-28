@@ -1,6 +1,6 @@
 
 config modbus_context 'rtu'
-	option serial_port '/dev/ttyS0'
+	option device '/dev/ttyS0'
 	option baudrate '1200'
 	option parity 'N'
 	option data_bits '8'
