@@ -1,13 +1,13 @@
 
 config modbus_context 'rtu'
 	option device '/dev/ttyS0'
-	option baudrate '1200'
+	option baudrate '115200'
 	option parity 'N'
 	option data_bits '8'
 	option stop_bits '1'
 	option slave_id '255'
 
 config modbus_context 'tcp'
-	option ipaddr '192.168.168.1'
+	option ipaddr '192.168.1.1'
 	option port '502'
 
