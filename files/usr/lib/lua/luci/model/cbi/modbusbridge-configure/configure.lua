@@ -37,18 +37,6 @@ stop_bits:value("1", "1")
 stop_bits:value("2", "2")
 stop_bits.default = "1"
 
-slave_id = rtu:option(Value, "slave_id", "Slave id(1-255)")
-slave_id.default = 1
-slave_id.maxlength = 3
-
-function slave_id:validate(value)
-    if tonumber(value) ~= nil and tonumber(value) >= 1 and tonumber(value) <= 255 then
-	return value
-    else
-	return nil
-    end
-end
-
 -- End of the RTU section
 
 
