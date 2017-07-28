@@ -10,7 +10,7 @@ MODBUSBRIDGE_CONFIG='modbusbridge'
 
 start_service() {
     local device
-    local baudrate
+    local baud_rate
     local parity
     local data_bits
     local stop_bits
@@ -22,7 +22,7 @@ start_service() {
     config_load $MODBUSBRIDGE_CONFIG
  
     config_get device 'rtu' 'device'
-    config_get baudrate 'rtu' 'baudrate'
+    config_get baud_rate 'rtu' 'baud_rate'
     config_get parity 'rtu' 'parity'
     config_get data_bits 'rtu' 'data_bits'
     config_get stop_bits 'rtu' 'stop_bits'
@@ -34,7 +34,7 @@ start_service() {
     procd_open_instance
 
     procd_set_param command "$MODBUSBRIDGE_BIN"
-    procd_append_param command "$device" "$baudrate" "$parity" "$data_bits" "$stop_bits" "$ip_address" "$port"
+    procd_append_param command "$device" "$baud_rate" "$parity" "$data_bits" "$stop_bits" "$ip_address" "$port"
 
     procd_close_instance
 }

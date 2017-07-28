@@ -7,16 +7,16 @@ device:value("/dev/ttyS0", "/dev/ttyS0")
 device:value("/dev/ttyS1", "/dev/ttyS1")
 device.default = "/dev/ttyS0"
 
-baudrate = rtu:option(ListValue, "baudrate", "Baudrate") 
-baudrate:value("1200", "1200")
-baudrate:value("2400", "2400")
-baudrate:value("4800", "4800")
-baudrate:value("9600", "9600")
-baudrate:value("19200", "19200")
-baudrate:value("38400", "38400")
-baudrate:value("57600", "57600")
-baudrate:value("115200", "115200")
-baudrate.default = "9600"
+baud_rate = rtu:option(ListValue, "baud_rate", "Baud rate") 
+baud_rate:value("1200", "1200")
+baud_rate:value("2400", "2400")
+baud_rate:value("4800", "4800")
+baud_rate:value("9600", "9600")
+baud_rate:value("19200", "19200")
+baud_rate:value("38400", "38400")
+baud_rate:value("57600", "57600")
+baud_rate:value("115200", "115200")
+baud_rate.default = "9600"
 
 parity = rtu:option(ListValue, "parity", "Parity")
 parity:value("N", "None")
