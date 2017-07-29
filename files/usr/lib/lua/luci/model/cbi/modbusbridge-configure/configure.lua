@@ -57,4 +57,9 @@ end
 
 -- End of the TCP section
 
+-- Reload modbusbridge service
+m.on_after_commit = function(self)                         
+    require("luci.sys").call("/etc/init.d/modbusbridge reload &>/dev/null")
+end
+
 return m
