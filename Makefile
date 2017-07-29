@@ -13,7 +13,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/modbusbridge
 	SECTION:=utils
 	CATEGORY:=Utilities
-	TITLE:=Modbusbridge -- prints a snarky message
+	TITLE:=Modbusbridge
 	DEPENDS:=+libmodbus
 endef
 
@@ -34,6 +34,11 @@ define Build/Compile
 		CROSS="$(TARGET_CROSS)" \
 		ARCH="$(ARCH)" \
 		$(1);
+endef
+
+
+define Package/modbusbrige/conffiles
+/etc/config/modbusbridge
 endef
 
 
