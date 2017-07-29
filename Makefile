@@ -59,4 +59,13 @@ define Package/modbusbridge/install
 	$(INSTALL_DATA) files/usr/lib/lua/luci/model/cbi/modbusbridge-configure/configure.lua $(1)/usr/lib/lua/luci/model/cbi/modbusbridge-configure/configure.lua
 endef
 
+
+define Package/modbusbridge/postrm
+#!/bin/sh
+rm -r /usr/lib/lua/luci/model/cbi/modbusbridge-configure/
+rm -r /usr/lib/lua/luci/controller/modbusbridge/
+exit 0
+endef
+
+
 $(eval $(call BuildPackage,modbusbridge))
