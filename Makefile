@@ -43,13 +43,16 @@ endef
 
 
 define Package/modbusbridge/install
+	$(INSTALL_DIR) $(1)/usr/bin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/modbusbridge $(1)/usr/bin/
 
+	$(INSTALL_DIR) $(1)/etc/config/
 	$(INSTALL_CONF) files/etc/config/modbusbridge $(1)/etc/config/modbusbridge
 
+	$(INSTALL_DIR) $(1)/etc/init.d/
 	$(INSTALL_BIN) files/etc/init.d/modbusbridge $(1)/etc/init.d/modbusbridge
 
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller/modbusbridge
+	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller/modbusbridge/
 	$(INSTALL_DATA) files/usr/lib/lua/luci/controller/modbusbridge/configure.lua $(1)/usr/lib/lua/luci/controller/modbusbridge/configure.lua
 
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi/modbusbridge-configure/
