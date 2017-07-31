@@ -40,7 +40,20 @@ tcp = m:section(NamedSection, "tcp", "modbus_context", "TCP configuration")
 ip = tcp:option(Value, "ipaddr", "IP address")
 ip.maxlength = 15
 function ip:validate(value)
-    return value:match("[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")
+    local ip_address = {string.match(value, "^(%d%d?%d?)%.(%d%d?%d?)%.(%d%d?%d?)%.(%d%d?%d?)$")}
+
+    if #ip_address ~= 4 then
+        return nil
+    end
+
+    for i=1, #ip_address do
+        local octet = tonumber(ip_address[i])
+        if octet == nil or octet < 0 or octet > 255 then
+            return nil
+        end
+    end
+
+    return value
 end
 
 port = tcp:option(Value, "port", "Port")
@@ -48,10 +61,11 @@ port.maxlength = 5
 port.default = "502"
 
 function port:validate(value)
-    if tonumber(value) ~= nil and tonumber(value) >= 1 and tonumber(value) <= 65535 then
-	return value
+    local port = tonumber(value)
+    if port ~= nil and port >= 1 and port <= 65535 then
+	    return value
     else
-	return nil
+	    return nil
     end
 end
 
