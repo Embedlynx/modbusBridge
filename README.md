@@ -1,5 +1,7 @@
 # Modbusbridge openwrt/lede feed
 
+___
+
 ## Build process:
 
 ### First install needed dependencies:
@@ -56,7 +58,7 @@ Then build-in modbusbridge package, select:
     make -j4
 ```
 
-### Upgrade your device
+### Upgrade your device:
 The firmware images are now in ```bin/targets/____/____/*.bin```. In our example ```bin/targets/ramips/mt7628/lede-ramips-mt7628-vocore2-squashfs-sysupgrade.bin```.
 
 Upload ```*-sysupgrade.bin``` image to your device. You can use ssh, for example:
@@ -66,3 +68,36 @@ Upload ```*-sysupgrade.bin``` image to your device. You can use ssh, for example
 And upgrade your device firmware:
 
 ```root@LEDE:/# sysupgrade -v /tmp/lede-ramips-mt7628-vocore2-squashfs-sysupgrade.bin```
+
+___
+
+## Modbusbridge usage:
+
+### Enable modbusbridge service:
+
+```/etc/init.d/modbusbridge enable```
+
+
+### Configure modbusbridge:
+There are two ways to configure modbusbridge - in the web configuration or in the console.
+
+#### Web configuration:
+Open your device web configuration:
+
+```sensible-browser 192.168.1.1```
+
+And go to:
+```
+    Services
+            |-> Modbusbridge
+```
+Edit the configuration and click "Save and Apply". This will automatically reload the modbusbridge service.
+
+#### Console configuration:
+Open ```/etc/config/modbusbridge``` file.
+
+```vi /etc/config/modbusbridge```
+
+And edit the configuration. Then, you should manual restart the modbusbridge service:
+
+```/etc/init.d/modbusbridge reload```
