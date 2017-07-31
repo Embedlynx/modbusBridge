@@ -51,6 +51,7 @@ Then build-in modbusbridge package, select:
     Utilities       --->
                         <*> modbusbridge
 ```
+After that Save.
 
 ### And build:
 ```
