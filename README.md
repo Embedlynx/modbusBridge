@@ -1,5 +1,4 @@
 # Modbusbridge openwrt/lede feed
-
 ___
 
 ## Build process:
@@ -79,7 +78,7 @@ ___
 
 
 ### Configure modbusbridge:
-There are two ways to configure modbusbridge - in the web configuration or in the console.
+There are two ways to configure the modbusbridge - in the web configuration or in the console.
 
 #### Web configuration:
 Open your device web configuration:
