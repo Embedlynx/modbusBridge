@@ -1,10 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=modbusbridge
+PKG_VERSION:=1.0.0
 PKG_RELEASE:=1
 
+PKG_MAINTAINER:=Georgi Dimov <georgi.dimov@embedlynx.com>
+PKG_LICENSE:=GPL-3.0+ LGPL-2.1+
 
-KG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
+PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
 
 include $(INCLUDE_DIR)/package.mk
@@ -18,7 +21,6 @@ define Package/modbusbridge
 endef
 
 
-# Specify what needs to be done to prepare for building the package.
 define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
 	$(CP) ./src/* $(PKG_BUILD_DIR)/
