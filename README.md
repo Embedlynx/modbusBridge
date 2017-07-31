@@ -76,6 +76,9 @@ ___
 
 ```/etc/init.d/modbusbridge enable```
 
+And reboot
+
+```reboot```
 
 ### Configure modbusbridge:
 There are two ways to configure the modbusbridge - in the web configuration or in the console.
